@@ -24,7 +24,7 @@ include('conness.php');
              
       
         <div class="megadiv container megga" style="text-align: center;">
-        <h1 class="tit">TEATRO DEL BORGO</h1>
+        <h1 class="tit">Circolino S.P.A.P.</h1>
         <div class="login" style="padding-bottom: 5%;">
             <h2 style="font-size: 400%;">
             <?php
@@ -40,41 +40,58 @@ include('conness.php');
         </h2>
         </div>
         <div class="megadiv container " style="text-align: center;">
-        <br><br><br><h1>LE NOSTRE FUNZIONALITA'</h1><br><br>
+        <br><br><br><h1>LE TUE RECENSIONI</h1><br><br>
     <div class="container row">
   
-        <div class="col-3">
-            <form action="../../PHP1/PHP1/tabella.php" method="POST">
-                 <input type="submit" value="attori" style="text-decoration: none; color: rgb(231, 231, 231);" name="tabella" class="btn varieclassi"> <br>
-            </form>
-                 <form action="../../PHP1/PHP1/select.php" method="POST" class="formm">
+        <div class="col-12">
+        <?php
+
+            $nome = $_SESSION['username'];
+            $sql = "SELECT recensione.data, recensione.voto, ristorante.nome  FROM recensione JOIN utente ON recensione.idutente = utente.id 
+            JOIN ristorante ON recensione.codiceristorante = ristorante.codice
+            WHERE utente.username = '$nome'";
             
-           
-                <input type="checkbox" id="vehicle1" name="prova[]" value="Nome">
-                <label for="vehicle1" > Nome</label><br>
-                <input type="checkbox" id="vehicle2" name="prova[]" value="AnnoNascita">
-                <label for="vehicle2"> AnnoNascita</label><br>
-                <input type="checkbox" id="vehicle3" name="prova[]" value="Nazionalita">
-                <label for="vehicle3"> Nazionalita</label><br><br>
-                <input type="submit" value="attori" class="botto" name="attori">
-              </form>
+            $result = $conn->query($sql);
+
+
+            if ($result->num_rows > 0) {
+                
+                echo "<h1 class='tit'>Le tue recensioni</h1>";
+            echo '<table class=\'scat\'>';
+            echo "<br><br>";
+            $count = 0;
+            while($row = mysqli_fetch_assoc($result)){
+                
+                if($count == 0){
+                    foreach ($row as $chiave => $y) {
+                        echo "<td>" . "<p style=\"pappa\">$chiave</p>"  . "</td>";
+                        }
+                }
+                $count ++;
+                echo "<tr>";
+                foreach ($row as $value) {
+                echo "<td>" . $value . "</td>";
+                }
+                echo "</tr>";
+                
+            }
+            echo '</table><br />';
+            }
+            else {
+                echo "ancora nessuna recensione";
+              }
+            
+
+
         
+            $conn->close();
+
+            echo "<br><br><a href=\"../../REG_e_LOGIN/REG_e_LOGIN/paginalogin.html\">
+                <input type=\"button\" value=\"TORNA INDIETRO\" class=\"btn boyyone\" style=\"background-color: rgb(175, 175, 175); color:black\"><br><br>
+                </a>";
+            ?>
         </div>
-        <div class="col-3">
-            <form action="../../PHP1/PHP1/tabella.php" method="POST">
-            <input type="submit" value="film" style="text-decoration: none; color: rgb(231, 231, 231);" name="tabella" class="btn varieclassi">
-            </form>
-        </div>
-        <div class="col-3">
-            <form action="../../PHP1/PHP1/tabella.php" method="POST">
-            <input type="submit" value="sale" style="text-decoration: none; color: rgb(231, 231, 231);" name="tabella" class="btn varieclassi">
-            </form>
-        </div>
-        <div class="col-3">
-            <form action="../../PHP1/PHP1/tabella.php" method="POST">
-            <input type="submit" value="recensioni" style="text-decoration: none; color: rgb(231, 231, 231);" name="tabella" class="btn varieclassi">
-            </form>
-        </div>
+
 
 
     </div>

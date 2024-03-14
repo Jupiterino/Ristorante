@@ -16,7 +16,8 @@ unset($_SESSION['messaggio']);
       <?php
       
       $name = $_POST['name'];
-      $pw = $_POST['pw'];
+      $pw = hash("sha256", $_POST['pw']);
+      
       
       if(empty($name) || empty($pw)){
         $_SESSION['messaggio'] = "MANCA QUALCHE DATO ...";
@@ -28,7 +29,7 @@ unset($_SESSION['messaggio']);
       }
 
       $sql =
-        "SELECT utente.username, utente.pwd FROM utente
+        "SELECT utente.username, utente.password FROM utente
           WHERE utente.username = '$name'";
 
       
@@ -42,7 +43,7 @@ unset($_SESSION['messaggio']);
           header('Location: messaggio.php');
         } else {
           $row = $result->fetch_assoc();
-          $p = $row["pwd"];
+          $p = $row["password"];
           if ($pw == $p) {
             $_SESSION['username'] = $name;
             header('Location: benvenuto.php');
@@ -53,8 +54,8 @@ unset($_SESSION['messaggio']);
 
 
 
+          }
         }
-      }
 
 
 
