@@ -1,3 +1,7 @@
+<?php
+session_start();
+include('conness.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +39,21 @@
                 </div>
                 
                 </form>
-        </div><br><br>
+        </div>
+        
+        <h4 style="margin-top: 3%" class="tess">
+            <?php 
+            
+                if(isset( $_SESSION['err']) ){
+                    echo $_SESSION['err'];
+                    unset($_SESSION['err']);
+                }
+                
+            
+            ?>
+        </h4>
+
+        <br><br>
         <div style="padding-top: 4%;">
             <h3 >oppure</h3>
             <h3 >REGISTRATI e crea un nuovo account</h3>

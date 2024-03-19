@@ -20,12 +20,12 @@ unset($_SESSION['messaggio']);
       
       
       if(empty($name) || empty($pw)){
-        $_SESSION['messaggio'] = "MANCA QUALCHE DATO ...";
-        header('Location: messaggio.php');
+        $_SESSION['err'] = "MANCA QUALCHE DATO ...";
+        header('Location: paginalogin.php');
       }
       if(empty($name) && empty($pw)){
-        $_SESSION['messaggio'] = "MANCA QUALCHE DATO ...";
-        header('Location: messaggio.php');
+        $_SESSION['err'] = "MANCA QUALCHE DATO ...";
+        header('Location: paginalogin.php');
       }
 
       $sql =
@@ -35,12 +35,12 @@ unset($_SESSION['messaggio']);
       
       $result = $conn->query($sql);
       if ($result == FALSE) {
-        $_SESSION['messaggio'] = " NON SEI ANCORA REGISTATO!!!";
-        header('Location: messaggio.php');
+        $_SESSION['err'] = " NON SEI ANCORA REGISTATO!!!";
+        header('Location: paginalogin.php');
       } else {
         if ($result->num_rows == 0) {
-          $_SESSION['messaggio'] = $name . " NON SEI ANCORA REGISTATO!!!";
-          header('Location: messaggio.php');
+          $_SESSION['err'] = $name . " NON SEI ANCORA REGISTATO!!!";
+          header('Location: paginalogin.php');
         } else {
           $row = $result->fetch_assoc();
           $p = $row["password"];
@@ -48,8 +48,8 @@ unset($_SESSION['messaggio']);
             $_SESSION['username'] = $name;
             header('Location: benvenuto.php');
           } else {
-            $_SESSION['messaggio'] = $name . " HAI SBAGLIATO PASSWORD!!!";
-            header('Location: messaggio.php');
+            $_SESSION['err'] = $name . " HAI SBAGLIATO PASSWORD!!!";
+            header('Location: paginalogin.php');
           }
 
 

@@ -100,6 +100,56 @@ include('conness.php');
         
         
     </div>
+    <br><br><br>
+    <div>
+        <h1>AGGIUNGI UNA RECENSIONE</h1><br><br>
+        <div class="boxx">
+            <div class="scatola" style="padding: 3%">
+                <h1>INSERISCI RECENSIONE</h1>
+                <form action="../../PHP1/PHP1/.php" method="POST">
+
+
+
+                    <label>Ristorante:</label><br>
+                    <select name="ristoranti" id="ristoranti">
+
+                        <?php 
+
+                            $sql = "SELECT nome, codice FROM ristorante";
+                            $result = $conn->query($sql);
+                            
+                            if ($result->num_rows > 0) {
+                                while($row = mysqli_fetch_assoc($result)){
+                        
+                                foreach ($row as $value) {
+                                    echo "<option value=\"$value\">$value</option>";
+                                }
+                         
+                                
+                            }
+                         
+                            }else {
+                                
+                            }
+                        ?>
+                    </select>
+
+                    <label>Valutazione:</label><br>
+                    <select name="recensione" id="recensione">
+
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        
+                    </select>
+                    <input type="submit" value="Submit" class="btn" style="background-color: rgb(175, 175, 175);">
+
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="container row sss" style="text-align: center; margin: auto; padding-top:10%;">
         <div class="col-4">
             <div class="scatola" style="padding: 3%">
