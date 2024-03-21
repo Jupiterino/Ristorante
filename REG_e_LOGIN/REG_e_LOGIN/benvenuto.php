@@ -84,11 +84,11 @@ include('conness.php');
 
 
         
-            $conn->close();
+            
 
             echo "<br><br><a href=\"../../REG_e_LOGIN/REG_e_LOGIN/paginalogin.html\">
-                <input type=\"button\" value=\"TORNA INDIETRO\" class=\"btn boyyone\" style=\"background-color: rgb(175, 175, 175); color:black\"><br><br>
-                </a>";
+                <input type=\"button\" value=\"TORNA INDIETRO\" class=\"botto\" style=\"background-color: rgb(175, 175, 175); color:black\"><br><br>
+                </a> ";
             ?>
         </div>
 
@@ -105,37 +105,38 @@ include('conness.php');
         <h1>AGGIUNGI UNA RECENSIONE</h1><br><br>
         <div class="boxx">
             <div class="scatola" style="padding: 3%">
-                <h1>INSERISCI RECENSIONE</h1>
-                <form action="../../PHP1/PHP1/.php" method="POST">
+                <form action="scriptRecensione.php" method="POST" class="row">
 
 
+                    <div class="col-md-4">
 
-                    <label>Ristorante:</label><br>
-                    <select name="ristoranti" id="ristoranti">
+                    
+                    <label>Ristorante:</label><br><br>
+                    <select name="ristoranti" id="ristoranti" class="sss">
 
                         <?php 
-
-                            $sql = "SELECT nome, codice FROM ristorante";
-                            $result = $conn->query($sql);
                             
-                            if ($result->num_rows > 0) {
-                                while($row = mysqli_fetch_assoc($result)){
-                        
-                                foreach ($row as $value) {
-                                    echo "<option value=\"$value\">$value</option>";
+                                $sql = "SELECT ristorante.nome, ristorante.codice FROM ristorante";
+                            
+                                $result = $conn->query($sql);
+                                if($result->num_rows > 0){
+                                while( $row = $result->fetch_assoc() ){
+                                
+                                    echo "<option value='" . $row['codice'] . "'>" . $row['nome'] . "</option>";
+
                                 }
                          
+                                }else {
+                                    echo " ";
+                                }
+
                                 
-                            }
-                         
-                            }else {
-                                
-                            }
                         ?>
                     </select>
-
-                    <label>Valutazione:</label><br>
-                    <select name="recensione" id="recensione">
+                    </div>
+                    <div class="col-md-4">  
+                    <label>Valutazione:</label><br><br>
+                    <select name="recensione" id="recensione"  class="sss">
 
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -144,12 +145,35 @@ include('conness.php');
                         <option value="5">5</option>
                         
                     </select>
-                    <input type="submit" value="Submit" class="btn" style="background-color: rgb(175, 175, 175);">
-
+                    </div> 
+                    <div class="col-4">
+                        <label >Data:</label><br><br>
+                        <input type="date" name="dataa" id="dataa"  class="sss">
+                    </div>
+                    
+                    <div>
+                        <br><br>
+                    <input type="submit" id="id1" value="Submit" class="botto" style="background-color: rgb(175, 175, 175);">
+                    
+                    </div>
+                   
                 </form>
             </div>
+
+            <h4 style="margin-top: 3%" class="tess">
+            <?php 
+            
+                if(isset( $_SESSION['messaggio']) ){
+                    echo $_SESSION['messaggio'];
+                    unset($_SESSION['messaggio']);
+                }
+                
+            
+            ?>
+        </h4>
         </div>
     </div>
+    <!--
     <div class="container row sss" style="text-align: center; margin: auto; padding-top:10%;">
         <div class="col-4">
             <div class="scatola" style="padding: 3%">
@@ -202,7 +226,7 @@ include('conness.php');
                 </form>
             </div>
         </div>
-    </div>
+    </div>-->
     <br>
     <br>
     <a href="scriptlogout.php" >

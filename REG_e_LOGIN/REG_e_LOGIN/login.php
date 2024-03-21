@@ -29,7 +29,7 @@ unset($_SESSION['messaggio']);
       }
 
       $sql =
-        "SELECT utente.username, utente.password FROM utente
+        "SELECT utente.username, utente.password, utente.id FROM utente
           WHERE utente.username = '$name'";
 
       
@@ -46,7 +46,11 @@ unset($_SESSION['messaggio']);
           $p = $row["password"];
           if ($pw == $p) {
             $_SESSION['username'] = $name;
+            $_SESSION['idUt'] = $row["id"];
             header('Location: benvenuto.php');
+
+
+
           } else {
             $_SESSION['err'] = $name . " HAI SBAGLIATO PASSWORD!!!";
             header('Location: paginalogin.php');

@@ -50,9 +50,10 @@ label {
   border-radius: 5px;
 }
 .botto {
-  background-color: darkgrey;
-  border: none;
-  border-radius: 5px;
+  background: rgb(191,191,191);
+background: radial-gradient(circle, rgba(191,191,191,1) 0%, rgba(140,140,140,1) 100%);
+  border-radius: 6px;
+  font-size: 120%;
 }
 
 .login {
@@ -114,4 +115,9 @@ label {
 .tess{
   color: rgb(138, 138, 138);
 
+}
+
+.sss{
+  background-color: #a8a8a8;
+  border: none;
 }

@@ -34,7 +34,7 @@ include('conness.php');
         </div>
         <div style="padding-top: 4%;">
             <div style="padding-top: 2%;">
-              <a href="paginalogin.html" >
+              <a href="paginalogin.php" >
                 <button class="botto"  >Torna alla home page</button>
             </a>  
             </div>
